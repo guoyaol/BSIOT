@@ -1,8 +1,16 @@
 <template>
-  <div>多级菜单 -> 二级-4</div>
+  <div v-html="legacySystemHTML">
+  </div>
 </template>
+
 <script>
 export default {
-  name: 'level_2_3'
+  data() {
+    return {
+      // Just like JSX! Oh wait...
+      legacySystemHTML: `
+      `
+    }
+  }
 }
 </script>

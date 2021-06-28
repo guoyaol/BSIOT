@@ -86,13 +86,13 @@ export default [
         component: () => import('@/view/multilevel/level-2-3.vue')
       },
       {
-        path: 'level_2_3',
-        name: 'level_2_3',
+        path: 'level_2_6',
+        name: 'level_2_6',
         meta: {
           icon: 'md-funnel',
           title: '查询统计'
         },
-        component: () => import('@/view/multilevel/level-2-3.vue')
+        component: () => import('@/view/multilevel/level-2-4.vue')
       },
       {
         path: 'level_2_4',
