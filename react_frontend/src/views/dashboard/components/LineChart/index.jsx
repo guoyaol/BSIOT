@@ -84,11 +84,11 @@ class LineChart extends Component {
         },
       },
       legend: {
-        data: ["expected", "actual"],
+        data: ["告警消息数", "总消息数"],
       },
       series: [
         {
-          name: "expected",
+          name: "告警消息数",
           itemStyle: {
             normal: {
               color: "#FF005A",
@@ -105,7 +105,7 @@ class LineChart extends Component {
           animationEasing: "cubicInOut",
         },
         {
-          name: "actual",
+          name: "总消息数",
           smooth: true,
           type: "line",
           itemStyle: {

@@ -18,7 +18,22 @@ const { Panel } = Collapse;
 class TableComponent extends Component {
   _isMounted = false; // 这个变量是用来标志当前组件是否挂载
   state = {
-    list: [],
+    list: [{id: 0,
+      author: "fuck",
+      date: "",
+      readings: 0,
+      star: "★",
+      status: "published",
+      title: ""},
+      {id: 1,
+        author: "damn",
+        date: "",
+        readings: 0,
+        star: "★",
+        status: "published",
+        title: ""},
+
+    ],
     loading: false,
     total: 0,
     listQuery: {
@@ -35,11 +50,12 @@ class TableComponent extends Component {
       author: "",
       date: "",
       readings: 0,
-      star: "★",
+      star: "wdick",
       status: "published",
       title: ""
     }
   };
+  /*
   fetchData = () => {
     this.setState({ loading: true });
     tableList(this.state.listQuery).then((response) => {
@@ -57,7 +73,7 @@ class TableComponent extends Component {
   }
   componentWillUnmount() {
     this._isMounted = false;
-  }
+  }*/
   filterTitleChange = (e) => {
     let value = e.target.value
     this.setState((state) => ({
@@ -158,18 +174,18 @@ class TableComponent extends Component {
         <Collapse defaultActiveKey={["1"]}>
           <Panel header="筛选" key="1">
             <Form layout="inline">
-              <Form.Item label="设备ID:">
+              <Form.Item label="Client ID:">
                 <Input onChange={this.filterTitleChange} />
               </Form.Item>
-              <Form.Item label="设备名称:">
+              <Form.Item label="类型:">
                 <Select
                   style={{ width: 120 }}
                   onChange={this.filterStatusChange}>
-                  <Select.Option value="published">在线</Select.Option>
-                  <Select.Option value="draft">失联</Select.Option>
+                  <Select.Option value="published">published</Select.Option>
+                  <Select.Option value="draft">draft</Select.Option>
                 </Select>
               </Form.Item>
-              <Form.Item label="可靠性:">
+              <Form.Item label="推荐指数:">
                 <Select
                   style={{ width: 120 }}
                   onChange={this.filterStarChange}>
@@ -194,12 +210,12 @@ class TableComponent extends Component {
           loading={this.state.loading}
           pagination={false}
         >
-          <Column title="设备编号" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id}/>
-          <Column title="设备ID" dataIndex="title" key="title" width={200} align="center"/>
-          <Column title="设备名称" dataIndex="author" key="author" width={100} align="center"/>
-          <Column title="信息" dataIndex="readings" key="readings" width={195} align="center"/>
-          <Column title="是否在线" dataIndex="star" key="star" width={195} align="center"/>
-          <Column title="是否在线" dataIndex="status" key="status" width={195} align="center" render={(status) => {
+          <Column title="Client ID" dataIndex="id" key="id" width={200} align="center" sorter={(a, b) => a.id - b.id}/>
+          <Column title="信息" dataIndex="title" key="title" width={200} align="center"/>
+          <Column title="经度" dataIndex="author" key="author" width={100} align="center"/>
+          <Column title="纬度" dataIndex="readings" key="readings" width={195} align="center"/>
+          <Column title="时间戳" dataIndex="star" key="star" width={195} align="center"/>
+          <Column title="value" dataIndex="status" key="status" width={195} align="center" render={(status) => {
             let color =
               status === "published" ? "green" : status === "deleted" ? "red" : "";
             return (
@@ -208,7 +224,7 @@ class TableComponent extends Component {
               </Tag>
             );
           }}/>
-          <Column title="注册时间" dataIndex="date" key="date" width={195} align="center"/>
+          <Column title="告警" dataIndex="date" key="date" width={195} align="center"/>
           <Column title="操作" key="action" width={195} align="center"render={(text, row) => (
             <span>
               <Button type="primary" shape="circle" icon="edit" title="编辑" onClick={this.handleEdit.bind(null,row)}/>
