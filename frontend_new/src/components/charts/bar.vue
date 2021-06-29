@@ -29,6 +29,15 @@ export default {
       let xAxisData = Object.keys(this.value)
       let seriesData = Object.values(this.value)
       let option = {
+        tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          label: {
+            backgroundColor: '#6a7985'
+          }
+        }
+      },
         title: {
           text: this.text,
           subtext: this.subtext,
@@ -36,15 +45,38 @@ export default {
         },
         xAxis: {
           type: 'category',
+          boundaryGap: false,
           data: xAxisData
         },
         yAxis: {
           type: 'value'
         },
-        series: [{
-          data: seriesData,
-          type: 'bar'
-        }]
+        series: [
+        {
+          name: '告警消息数',
+          type: 'line',
+          stack: '总量',
+          areaStyle: { normal: {
+            color: '#ff0000'
+          } },
+          data: seriesData
+        },
+        {
+          name: '总消息数',
+          type: 'line',
+          stack: '总量',
+          label: {
+            normal: {
+              show: true,
+              position: 'top'
+            }
+          },
+          areaStyle: { normal: {
+            color: '#398DBF'
+          } },
+          data: [12,14,15,46,57]
+        }
+      ]
       }
       this.dom = echarts.init(this.$refs.dom, 'tdTheme')
       this.dom.setOption(option)
