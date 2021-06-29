@@ -35,8 +35,8 @@ public class MsgDeviceController {
     public Map<String,Object> GetHistory(@RequestParam("clientid") String clientid){
         Map<String,Object> map=new HashMap<String, Object>();
 
-        List<Float> latlist = msgdeviceService.GetHistoryLat(clientid);
-        List<Float> lnglist = msgdeviceService.GetHistoryLng(clientid);
+        List<Double> latlist = msgdeviceService.GetHistoryLat(clientid);
+        List<Double> lnglist = msgdeviceService.GetHistoryLng(clientid);
         map.put("lat",latlist);
         map.put("lng",lnglist);
         return map;

@@ -25,12 +25,12 @@ public class MsgDeviceDaoImpl implements MsgDeviceDao {
     }
 
     @Override
-    public List<Float> GetHistoryLat(String clientid){
+    public List<Double> GetHistoryLat(String clientid){
         return msgdeviceRepository.GetHistoryLat(clientid);
     }
 
     @Override
-    public List<Float> GetHistoryLng(String clientid){
+    public List<Double> GetHistoryLng(String clientid){
         return msgdeviceRepository.GetHistoryLng(clientid);
     }
 

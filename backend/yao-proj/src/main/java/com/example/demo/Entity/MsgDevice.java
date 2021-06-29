@@ -38,15 +38,15 @@ public class MsgDevice {
 
     @Basic
     @Column(name = "lat")
-    private float lat;
+    private double lat;
 
     @Basic
     @Column(name = "lng")
-    private float lng;
+    private double lng;
 
     @Basic
     @Column(name = "timestamp")
-    private float timestamp;
+    private double timestamp;
 
     @Basic
     @Column(name = "value")

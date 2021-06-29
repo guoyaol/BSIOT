@@ -11,14 +11,26 @@ public interface MsgDeviceRepository extends JpaRepository<MsgDevice,Integer> {
     int getallids();
 
     @Query(" select lat from MsgDevice where clientId=?1 order by id")
-    List<Float> GetHistoryLat(String clientid);
+    List<Double> GetHistoryLat(String clientid);
 
     @Query(" select lng from MsgDevice where clientId=?1 order by id")
-    List<Float> GetHistoryLng(String clientid);
+    List<Double> GetHistoryLng(String clientid);
 
     @Query(" select t from MsgDevice t where t.clientId=?1 order by t.id")
     List<MsgDevice> GetAllInfo(String clientid);
 
-    @Query(" select t from MsgDevice t where t.alert=1 or t.timestamp in (select max(a.timestamp) from MsgDevice a where a.alert=1 group by a.clientId ) group by t.clientId")
+    //@Query(" select t from MsgDevice t where t.alert=1 or t.timestamp in (select max(a.timestamp) from MsgDevice a where a.alert=1 group by a.clientId ) group by t.clientId")
+    @Query(" select t from MsgDevice t where (t.timestamp,t.clientId) in (select max(a.timestamp),a.clientId from MsgDevice a group by a.clientId)")
     List<MsgDevice> GetLatest();
 }
+/*
+select * from msg_device t
+where (t.timestamp,t.clientid) in 
+(select max(a.timestamp),a.clientid
+from msg_device a 
+group by a.clientid);
+*/
+
+/*
+select t from MsgDevice t where (t.timestamp,t.clientId) in (select max(a.timestamp),a.clientId from MsgDevice a group by a.clientId)
+*/

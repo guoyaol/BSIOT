@@ -8,8 +8,8 @@ import java.util.Map;
 public interface MsgDeviceService {
     int GetDeviceAmount();
     int GetTotalAmount();
-    List<Float> GetHistoryLat(String clientid);
-    List<Float> GetHistoryLng(String clientid);
+    List<Double> GetHistoryLat(String clientid);
+    List<Double> GetHistoryLng(String clientid);
     List<MsgDevice> GetAllInfo(String clientid);
     List<MsgDevice> GetLatestAlert();
 }
