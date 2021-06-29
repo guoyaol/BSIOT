@@ -22,15 +22,17 @@ const Zip = Loadable({loader: () => import(/*webpackChunkName:'Zip'*/'@/views/zi
 const Clipboard = Loadable({loader: () => import(/*webpackChunkName:'Clipboard'*/'@/views/clipboard'),loading: Loading});
 const Error404 = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'@/views/error/404'),loading: Loading});
 const User = Loadable({loader: () => import(/*webpackChunkName:'User'*/'@/views/user'),loading: Loading});
-const About = Loadable({loader: () => import(/*webpackChunkName:'About'*/'@/views/about'),loading: Loading});
 const Bug = Loadable({loader: () => import(/*webpackChunkName:'Bug'*/'@/views/bug'),loading: Loading});
 
 const OurMap = Loadable({loader: () => import(/*webpackChunkName:'OurMap'*/'@/views/map'),loading: Loading});
 
+const Device = Loadable({loader: () => import(/*webpackChunkName:'Device'*/'@/views/device'),loading: Loading});
+const Message = Loadable({loader: () => import(/*webpackChunkName:'Message'*/'@/views/message'),loading: Loading});
+
 export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin","editor","guest"] },
-  { path: "/device", component: Table, roles: ["admin","editor","guest"] },
-  { path: "/message", component: Table, roles: ["admin","editor","guest"] },
+  { path: "/device", component: Device, roles: ["admin","editor","guest"] },
+  { path: "/message", component: Message, roles: ["admin","editor","guest"] },
   { path: "/doc", component: Doc, roles: ["admin","editor","guest"] },
   { path: "/map", component: OurMap, roles: ["admin","editor","guest"] },
   { path: "/guide", component: Guide, roles: ["admin","editor"] },
@@ -52,7 +54,6 @@ export default [
   { path: "/zip", component: Zip, roles: ["admin","editor"] },
   { path: "/clipboard", component: Clipboard, roles: ["admin","editor"] },
   { path: "/user", component: User, roles: ["admin"] },
-  { path: "/about", component: About, roles: ["admin", "editor", "guest"] },
   { path: "/bug", component: Bug, roles: ["admin"] },
   { path: "/error/404", component: Error404 },
 ];
