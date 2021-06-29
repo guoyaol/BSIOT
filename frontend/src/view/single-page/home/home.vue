@@ -53,7 +53,11 @@ export default {
         ],
       pieData: [
       ],
-      barData: null
+      barData: {
+        "-1":5,
+        "-2":10,
+        "-3":5
+      }
     }
 
   },
