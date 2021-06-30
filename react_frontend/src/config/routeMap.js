@@ -2,7 +2,6 @@ import Loadable from 'react-loadable';
 import Loading from '@/components/Loading'
 const Dashboard = Loadable({loader: () => import(/*webpackChunkName:'Dashboard'*/'@/views/dashboard'),loading: Loading});
 const Doc = Loadable({loader: () => import(/*webpackChunkName:'Doc'*/'@/views/doc'),loading: Loading});
-const Guide = Loadable({loader: () => import(/*webpackChunkName:'Guide'*/'@/views/guide'),loading: Loading});
 const Explanation = Loadable({loader: () => import(/*webpackChunkName:'Explanation'*/'@/views/permission'),loading: Loading});
 const AdminPage = Loadable({loader: () => import(/*webpackChunkName:'AdminPage'*/'@/views/permission/adminPage'),loading: Loading});
 const GuestPage = Loadable({loader: () => import(/*webpackChunkName:'GuestPage'*/'@/views/permission/guestPage'),loading: Loading});
@@ -22,7 +21,6 @@ const Zip = Loadable({loader: () => import(/*webpackChunkName:'Zip'*/'@/views/zi
 const Clipboard = Loadable({loader: () => import(/*webpackChunkName:'Clipboard'*/'@/views/clipboard'),loading: Loading});
 const Error404 = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'@/views/error/404'),loading: Loading});
 const User = Loadable({loader: () => import(/*webpackChunkName:'User'*/'@/views/user'),loading: Loading});
-const Bug = Loadable({loader: () => import(/*webpackChunkName:'Bug'*/'@/views/bug'),loading: Loading});
 
 const OurMap = Loadable({loader: () => import(/*webpackChunkName:'OurMap'*/'@/views/map'),loading: Loading});
 
@@ -35,7 +33,6 @@ export default [
   { path: "/message", component: Message, roles: ["admin","editor","guest"] },
   { path: "/doc", component: Doc, roles: ["admin","editor","guest"] },
   { path: "/map", component: OurMap, roles: ["admin","editor","guest"] },
-  { path: "/guide", component: Guide, roles: ["admin","editor"] },
   { path: "/permission/explanation", component: Explanation, roles: ["admin"] },
   { path: "/permission/adminPage", component: AdminPage, roles: ["admin"] },
   { path: "/permission/guestPage", component: GuestPage, roles: ["guest"] },
@@ -54,6 +51,5 @@ export default [
   { path: "/zip", component: Zip, roles: ["admin","editor"] },
   { path: "/clipboard", component: Clipboard, roles: ["admin","editor"] },
   { path: "/user", component: User, roles: ["admin"] },
-  { path: "/bug", component: Bug, roles: ["admin"] },
   { path: "/error/404", component: Error404 },
 ];

@@ -27,6 +27,20 @@ const menuList = [
     icon: "key",
     roles:["admin","editor","guest"]
   },
+  {
+    title: "导出Excel",
+    icon: "file-excel",
+    path: "/excel/export",
+    roles:["admin","editor"]
+  },
+  {
+    title: "用户管理",
+    path: "/user",
+    icon: "usergroup-add",
+    roles:["admin"]
+  }
+];
+export default menuList;
   /*
   {
     title: "权限测试",
@@ -77,7 +91,7 @@ const menuList = [
         roles:["admin","editor"],
       },
     ],
-  },*/
+  },
   {
     title: "图表",
     path: "/charts",
@@ -100,7 +114,7 @@ const menuList = [
         roles:["admin","editor"],
       },
     ],
-  },
+  },*/
   /*
   {
     title: "路由嵌套",
@@ -168,11 +182,3 @@ const menuList = [
     icon: "copy",
     roles:["admin","editor"]
   },*/
-  {
-    title: "用户管理",
-    path: "/user",
-    icon: "usergroup-add",
-    roles:["admin"]
-  }
-];
-export default menuList;
