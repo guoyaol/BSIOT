@@ -12,6 +12,7 @@ var devicelist = [
     {"text":"client4","location":"126,25","count":1},
 ];
 //API：选中某一个client，展示历史路径
+//http://localhost:8080/gethistory?clientid=device0001
 var history = [
     {lng: 120.403119, lat: 30.929543},
     {lng: 110.265139, lat: 39.978658},
