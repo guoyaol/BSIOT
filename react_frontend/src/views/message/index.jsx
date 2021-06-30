@@ -154,9 +154,8 @@ class App extends React.Component {
     return (
       <div>
         <div className="table-operations">
-          <Button onClick={this.setAgeSort}>Sort alert</Button>
-          <Button onClick={this.clearFilters}>Clear filters</Button>
-          <Button onClick={this.clearAll}>Clear filters and sorters</Button>
+          <Button onClick={this.clearFilters}>清除过滤器</Button>
+          <Button onClick={this.clearAll}>清除过滤器和排序</Button>
         </div>
         <Table columns={columns} dataSource={data} onChange={this.handleChange} />
       </div>
