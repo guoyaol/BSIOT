@@ -18,7 +18,6 @@ const Table = Loadable({loader: () => import(/*webpackChunkName:'Table'*/'@/view
 const ExportExcel = Loadable({loader: () => import(/*webpackChunkName:'ExportExcel'*/'@/views/excel/exportExcel'),loading: Loading});
 const UploadExcel = Loadable({ loader: () => import(/*webpackChunkName:'UploadExcel'*/'@/views/excel/uploadExcel'),loading: Loading });
 const Zip = Loadable({loader: () => import(/*webpackChunkName:'Zip'*/'@/views/zip'),loading: Loading});
-const Clipboard = Loadable({loader: () => import(/*webpackChunkName:'Clipboard'*/'@/views/clipboard'),loading: Loading});
 const Error404 = Loadable({loader: () => import(/*webpackChunkName:'Error404'*/'@/views/error/404'),loading: Loading});
 const User = Loadable({loader: () => import(/*webpackChunkName:'User'*/'@/views/user'),loading: Loading});
 
@@ -26,9 +25,11 @@ const OurMap = Loadable({loader: () => import(/*webpackChunkName:'OurMap'*/'@/vi
 
 const Device = Loadable({loader: () => import(/*webpackChunkName:'Device'*/'@/views/device'),loading: Loading});
 const Message = Loadable({loader: () => import(/*webpackChunkName:'Message'*/'@/views/message'),loading: Loading});
+const Register = Loadable({loader: () => import(/*webpackChunkName:'Rsgister'*/'@/views/register'),loading: Loading});
 
 export default [
   { path: "/dashboard", component: Dashboard, roles: ["admin","editor","guest"] },
+  { path: "/register", component: Register, roles: ["admin","editor","guest"] },
   { path: "/device", component: Device, roles: ["admin","editor","guest"] },
   { path: "/message", component: Message, roles: ["admin","editor","guest"] },
   { path: "/doc", component: Doc, roles: ["admin","editor","guest"] },
@@ -49,7 +50,6 @@ export default [
   { path: "/excel/export", component: ExportExcel, roles: ["admin","editor"] },
   { path: "/excel/upload", component: UploadExcel, roles: ["admin","editor"] },
   { path: "/zip", component: Zip, roles: ["admin","editor"] },
-  { path: "/clipboard", component: Clipboard, roles: ["admin","editor"] },
   { path: "/user", component: User, roles: ["admin"] },
   { path: "/error/404", component: Error404 },
 ];

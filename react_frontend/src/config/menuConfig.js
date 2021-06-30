@@ -10,6 +10,12 @@ const menuList = [
     roles:["admin","editor","guest"]
   },
   {
+    title: "注册新账号",
+    path: "/register",
+    icon: "usergroup-add",
+    roles:["admin","editor","guest"]
+  },
+  {
     title: "配置设备",
     path: "/device",
     icon: "cluster",
