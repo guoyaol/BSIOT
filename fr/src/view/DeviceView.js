@@ -1,180 +1,244 @@
-import { Table, Button,Form, Descriptions } from 'antd';
+import { Table, Button, Form, Descriptions } from 'antd';
 import { Icon, Input } from 'antd';
 import React from 'react';
 import { ReactDOM } from 'react';
 
 
+import { Card } from 'antd';
+
+import { NavLink } from 'react-router-dom';
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {
+    DesktopOutlined,
+    PieChartOutlined,
+    FileOutlined,
+    TeamOutlined,
+    UserOutlined,
+    LikeOutlined
+} from '@ant-design/icons';
 
 //TODO:用API获取所有设备device
 //这个API可能得改一下，改成返回数据库msg_device里所有设备
 //前端可以实现筛选
 const data = [
-  {
-    id: 1,
-    clientid: 'client1',
-    name: 'Ship',
-    description: 'New York No. 1 Lake Park'
-  },
-  {
-    id: 2,
-    clientid: 'client2',
-    name: 'Plane',
-    description: 'New York No. 1 Lake Park'
-  },
+    {
+        id: 1,
+        clientid: 'client1',
+        name: 'Ship',
+        description: 'New York No. 1 Lake Park'
+    },
+    {
+        id: 2,
+        clientid: 'client2',
+        name: 'Plane',
+        description: 'New York No. 1 Lake Park'
+    },
 ];
 
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
+}
 
-class App extends React.Component {
+
+
+const { Header, Content, Footer, Sider } = Layout;
+
+
+
+const { SubMenu } = Menu;
+
+class DeviceView extends React.Component {
+
 
     componentDidMount() {
         // To disable submit button at the beginning.
         this.props.form.validateFields();
-      }
-    
-      handleSubmit = e => {
+    }
+
+    handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-          if (!err) {
-            console.log('Received values of form: ', values);
-          }
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
         });
-      };
+    };
 
-  state = {
-    filteredInfo: null,
-    sortedInfo: null,
-  };
+    state = {
+        filteredInfo: null,
+        sortedInfo: null,
+    };
 
-  handleChange = (pagination, filters, sorter) => {
-    console.log('Various parameters', pagination, filters, sorter);
-    this.setState({
-      filteredInfo: filters,
-      sortedInfo: sorter,
-    });
-  };
+    handleChange = (pagination, filters, sorter) => {
+        console.log('Various parameters', pagination, filters, sorter);
+        this.setState({
+            filteredInfo: filters,
+            sortedInfo: sorter,
+        });
+    };
 
-  clearFilters = () => {
-    this.setState({ filteredInfo: null });
-  };
+    clearFilters = () => {
+        this.setState({ filteredInfo: null });
+    };
 
-  clearAll = () => {
-    this.setState({
-      filteredInfo: null,
-      sortedInfo: null,
-    });
-  };
+    clearAll = () => {
+        this.setState({
+            filteredInfo: null,
+            sortedInfo: null,
+        });
+    };
 
-  setAgeSort = () => {
-    this.setState({
-      sortedInfo: {
-        order: 'descend',
-        columnKey: 'alert',
-      },
-    });
-  };
+    setAgeSort = () => {
+        this.setState({
+            sortedInfo: {
+                order: 'descend',
+                columnKey: 'alert',
+            },
+        });
+    };
 
-  render() {
+    state = {
+        collapsed: false,
+    };
 
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    onCollapse = collapsed => {
+        console.log(collapsed);
+        this.setState({ collapsed });
+    };
 
-    // Only show error after a field is touched.
-    const usernameError = isFieldTouched('username') && getFieldError('username');
-    const passwordError = isFieldTouched('password') && getFieldError('password');
 
-    let { sortedInfo, filteredInfo } = this.state;
-    sortedInfo = sortedInfo || {};
-    filteredInfo = filteredInfo || {};
-    const columns = [
-      {
-        title: 'clientid',
-        dataIndex: 'clientid',
-        key: 'clientid',
-        filters: [{ text: 'client1', value: 'client1' }, 
-        { text: 'client2', value: 'client2' }, 
-        { text: 'client3', value: 'client3' }, 
-        { text: 'client4', value: 'client4' }, 
-        { text: 'client5', value: 'client5' }, 
-      ],
-        filteredValue: filteredInfo.clientid || null,
-        onFilter: (value, record) => record.clientid.includes(value),
+    render() {
 
-        ellipsis: true,
-      },
-      {
-        title: '设备名称',
-        dataIndex: 'name',
-        key: 'name',
 
-        ellipsis: true,
-      },
-      {
-        title: '设备描述',
-        dataIndex: 'description',
-        key: 'description',
 
-        ellipsis: true,
-      },
-      
-    ];
-    return (
+        const { collapsed } = this.state;
 
-      <div>
 
-<Form layout="inline" onSubmit={this.handleSubmit}>
-        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: '请输入设备ID！' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="设备ID"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: '请输入设备名！' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="设备名称"
-            />,
-          )}
-        </Form.Item>
-        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: '请输入设备描述！' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="设备描述信息"
-            />,
-          )}
-        </Form.Item>
+        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        <Form.Item>
-          <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-            注册/修改设备信息
-          </Button>
-        </Form.Item>
+        // Only show error after a field is touched.
+        const usernameError = isFieldTouched('username') && getFieldError('username');
+        const passwordError = isFieldTouched('password') && getFieldError('password');
 
-      </Form>
+        let { sortedInfo, filteredInfo } = this.state;
+        sortedInfo = sortedInfo || {};
+        filteredInfo = filteredInfo || {};
+        const columns = [
+            {
+                title: 'clientid',
+                dataIndex: 'clientid',
+                key: 'clientid',
+                filters: [{ text: 'client1', value: 'client1' },
+                { text: 'client2', value: 'client2' },
+                { text: 'client3', value: 'client3' },
+                { text: 'client4', value: 'client4' },
+                { text: 'client5', value: 'client5' },
+                ],
+                filteredValue: filteredInfo.clientid || null,
+                onFilter: (value, record) => record.clientid.includes(value),
 
-        <div className="table-operations">
-          <Button onClick={this.clearFilters}>清除过滤器</Button>
-        </div>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
-      </div>
-    );
-  }
+                ellipsis: true,
+            },
+            {
+                title: '设备名称',
+                dataIndex: 'name',
+                key: 'name',
+
+                ellipsis: true,
+            },
+            {
+                title: '设备描述',
+                dataIndex: 'description',
+                key: 'description',
+
+                ellipsis: true,
+            },
+
+        ];
+
+        return (
+            <Layout style={{ minHeight: '100vh' }}>
+                <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+                    <div className="logo" />
+                    <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                        <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
+                            <LikeOutlined />    主页
+                        </Menu.Item>
+                        <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
+                            <LikeOutlined />    设备管理
+                        </Menu.Item>
+                        <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
+                            <LikeOutlined />    消息查询
+                        </Menu.Item>
+                        <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
+                            <LikeOutlined />    地图
+                        </Menu.Item>
+
+                    </Menu>
+                </Sider>
+                <Layout className="site-layout">
+                    <Header className="site-layout-background" style={{ padding: 0 }} />
+                    <Content style={{ margin: '0 16px' }}>
+
+                        <div>
+
+                            <Form layout="inline" onSubmit={this.handleSubmit}>
+                                <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+                                    {getFieldDecorator('username', {
+                                        rules: [{ required: true, message: '请输入设备ID！' }],
+                                    })(
+                                        <Input
+                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            placeholder="设备ID"
+                                        />,
+                                    )}
+                                </Form.Item>
+                                <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+                                    {getFieldDecorator('username', {
+                                        rules: [{ required: true, message: '请输入设备名！' }],
+                                    })(
+                                        <Input
+                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            placeholder="设备名称"
+                                        />,
+                                    )}
+                                </Form.Item>
+                                <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+                                    {getFieldDecorator('username', {
+                                        rules: [{ required: true, message: '请输入设备描述！' }],
+                                    })(
+                                        <Input
+                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            placeholder="设备描述信息"
+                                        />,
+                                    )}
+                                </Form.Item>
+
+                                <Form.Item>
+                                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+                                        注册/修改设备信息
+                                    </Button>
+                                </Form.Item>
+
+                            </Form>
+
+                            <div className="table-operations">
+                                <Button onClick={this.clearFilters}>清除过滤器</Button>
+                            </div>
+                            <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+                        </div>
+
+                    </Content>
+                    <Footer style={{ textAlign: 'center' }}>“设备已联网”物联网平台</Footer>
+                </Layout>
+
+
+
+            </Layout>
+
+
+        );
+    }
 }
 
-//ReactDOM.render(<App />, mountNode);
-
-const EditableFormTable = Form.create()(App);
-// ReactDOM.render(<EditableFormTable />, mountNode);
-
-export default EditableFormTable;
+export default DeviceView
