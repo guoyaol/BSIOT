@@ -43,13 +43,16 @@ class IndexView extends React.Component {
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
+            <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
+              <LikeOutlined />    主页
+            </Menu.Item>
+            <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
               <LikeOutlined />    设备管理
             </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
+            <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
               <LikeOutlined />    消息查询
             </Menu.Item>
-            <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
+            <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
               <LikeOutlined />    地图
             </Menu.Item>
 
@@ -58,10 +61,7 @@ class IndexView extends React.Component {
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
+
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               <div className="app-container">
                 <div className="site-card-wrapper">
