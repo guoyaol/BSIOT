@@ -154,13 +154,13 @@ class App extends React.Component {
             />,
           )}
         </Form.Item>
-        
 
         <Form.Item>
           <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-            修改/注册新设备
+            注册/修改设备信息
           </Button>
         </Form.Item>
+
       </Form>
 
         <div className="table-operations">
