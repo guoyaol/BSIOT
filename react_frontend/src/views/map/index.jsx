@@ -5,9 +5,10 @@ import {simpleMapStyle} from 'react-bmap'
 //API：利用 http://localhost:8080/getlatestalert
 //我更改了这个API，现在他会返回每个设备的最新信息
 var devicelist = [
+    //count为4的是alert=1的告警设备
     {"text":"client1","location":"120.403119,30.929543","count":4},
     {"text":"client2","location":"113.22183,28.191712","count":4},
-
+    //count为1的是alert=0普通设备
     {"text":"client3","location":"126.49,41","count":1},
     {"text":"client4","location":"126,25","count":1},
 ];

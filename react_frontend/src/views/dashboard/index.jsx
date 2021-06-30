@@ -24,6 +24,10 @@ const Dashboard = () => {
     lineChartDefaultData["New Visits"]
   );
 
+
+const count_device=3;
+const count_message=129;
+
   const handleSetLineChartData = (type) => setLineChartData(lineChartDefaultData[type]);
 
   return (
@@ -32,12 +36,12 @@ const Dashboard = () => {
         <Row gutter={16}>
           <Col span={8}>
             <Card title="设备总量" bordered={false}>
-              5
+            {count_device}
             </Card>
           </Col>
           <Col span={8}>
             <Card title="消息总量" bordered={false}>
-              128
+            {count_message}
             </Card>
           </Col>
           <Col span={8}>
