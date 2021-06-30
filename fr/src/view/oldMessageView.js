@@ -1,18 +1,7 @@
+import { Table, Button,Form } from 'antd';
 import React from 'react';
-import { Table, Button } from 'antd';
+import { ReactDOM } from 'react';
 
-
-import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-  LikeOutlined
-} from '@ant-design/icons';
-
-const { Header, Content, Footer, Sider } = Layout;
 /*
 CREATE TABLE `msg_device`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
@@ -32,42 +21,30 @@ CREATE TABLE `msg_device`  (
 //这个API可能得改一下，改成返回数据库里的所有消息msg_device
 //前端可以实现筛选
 const data = [
-    {
-      id: 0,
-      alert: 1,
-      clientid: 'client1',
-      info: 'New York No. 1 Lake Park',
-      lat:129,
-      lng:29,
-      timestamp:123123123,
-      value:29,
-    },
-    {
-      id: 2,
-      alert: 0,
-      clientid: 'client2',
-      info: 'London No. 1 Lake Park',
-      lat:128.5,
-      lng:28,
-      timestamp:123123122,
-      value:2,
-    },
-  
-  ];
+  {
+    id: 0,
+    alert: 1,
+    clientid: 'client1',
+    info: 'New York No. 1 Lake Park',
+    lat:129,
+    lng:29,
+    timestamp:123123123,
+    value:29,
+  },
+  {
+    id: 2,
+    alert: 0,
+    clientid: 'client2',
+    info: 'London No. 1 Lake Park',
+    lat:128.5,
+    lng:28,
+    timestamp:123123122,
+    value:2,
+  },
 
+];
 
-
-class MessageView extends React.Component {
-
-  state = {
-    collapsed: false,
-  };
-
-  onCollapse = collapsed => {
-    console.log(collapsed);
-    this.setState({ collapsed });
-  };
-
+class App extends React.Component {
   state = {
     filteredInfo: null,
     sortedInfo: null,
@@ -101,11 +78,7 @@ class MessageView extends React.Component {
     });
   };
 
-
   render() {
-
-    const { collapsed } = this.state;
-
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
@@ -178,55 +151,21 @@ class MessageView extends React.Component {
         ellipsis: true,
       },
     ];
-
     return (
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-          <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
-              <LikeOutlined />    主页
-            </Menu.Item>
-            <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
-              <LikeOutlined />    设备管理
-            </Menu.Item>
-            <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
-              <LikeOutlined />    消息查询
-            </Menu.Item>
-            <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
-              <LikeOutlined />    地图
-            </Menu.Item>
-
-          </Menu>
-        </Sider>
-        <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content style={{ margin: '0 16px' }}>
-
-          <div>
+      <div>
         <div className="table-operations">
           <Button onClick={this.clearFilters}>清除过滤器</Button>
           <Button onClick={this.clearAll}>清除过滤器和排序</Button>
         </div>
         <Table columns={columns} dataSource={data} onChange={this.handleChange} />
       </div>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>“设备已联网”物联网平台</Footer>
-        </Layout>
-
-
-
-      </Layout>
-
-
     );
   }
 }
 
-export default MessageView
+//ReactDOM.render(<App />, mountNode);
 
+const EditableFormTable = Form.create()(App);
+// ReactDOM.render(<EditableFormTable />, mountNode);
 
-
-
-
-
+export default EditableFormTable;
