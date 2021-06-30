@@ -1,6 +1,27 @@
-import React, { useState, Component } from "react";
+import React from 'react';
+import { Row, Col } from "antd";
+
+import { Card } from 'antd';
+
+import { NavLink } from 'react-router-dom';
+import { Layout, Menu, Breadcrumb } from 'antd';
+import {
+  DesktopOutlined,
+  PieChartOutlined,
+  FileOutlined,
+  TeamOutlined,
+  UserOutlined,
+  LikeOutlined
+} from '@ant-design/icons';
+import  { useState, Component } from "react";
 import { Polyline, Map, MarkerList, MapTypeControl, ScaleControl, NavigationControl, InfoWindow } from 'react-bmap'
 import { simpleMapStyle } from 'react-bmap'
+import * as userService from '../services/userService'
+
+
+const { Header, Content, Footer, Sider } = Layout;
+
+
 
 
 //API：利用 http://localhost:8080/getlatestalert
@@ -24,10 +45,81 @@ var history = [
 
 
 
-export default class OurMap extends Component {
-    render() {
 
-        return <div>
+class MapView extends React.Component {
+
+  state = {
+    collapsed: false,
+  };
+
+  onCollapse = collapsed => {
+    console.log(collapsed);
+    this.setState({ collapsed });
+  };
+
+  constructor(props) {
+    　　super(props)
+    　　
+    　　this.state = {
+    　　　　isLoading: false,
+    　　}
+    }
+componentWillMount(){
+    // userService.login({username:"abc",password:"abc"});
+    this.setState({isLoading: true})
+     let callback= (data) => {
+         let list=[];
+         for(let i=0;i<data.length;i++){
+             let color=1;
+             if(data[i].alert==1){
+                 color=4;
+             }
+             let loc=""+data[i].lng+","+data[i].lat
+             let item={text:data[i].clientId,location:loc,count:color};
+             list.push(item);
+         }
+         console.log(list)
+         devicelist=list;
+         console.log(devicelist)
+         this.setState({isLoading: false})
+     };
+     userService.getlatestalert({},callback)
+ }
+
+
+  render() {
+    const count_device = 3;
+    const count_message = 129;
+    const { collapsed } = this.state;
+    　　let {isLoading} = this.state
+    　　if (isLoading) {
+    　　　　return<div>isLoading…</div>
+    　　} 
+    return (
+      <Layout style={{ minHeight: '100vh' }}>
+        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+          <div className="logo" />
+          <Menu theme="dark" defaultSelectedKeys={['4']} mode="inline">
+            <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
+              <LikeOutlined />    主页
+            </Menu.Item>
+            <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
+              <LikeOutlined />    设备管理
+            </Menu.Item>
+            <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
+              <LikeOutlined />    消息查询
+            </Menu.Item>
+            <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
+              <LikeOutlined />    地图
+            </Menu.Item>
+
+          </Menu>
+        </Sider>
+        <Layout className="site-layout">
+          <Header className="site-layout-background" style={{ padding: 0 }} />
+          <Content style={{ margin: '0 16px' }}>
+
+          <div>
             <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=vFK8qB9klq53fgxNFvpNZxwBqqhznKG6"></script>
             <Map style={{ height: '600px', width: '800px' }} center={{
                 lng: 105.403119,
@@ -51,20 +143,33 @@ export default class OurMap extends Component {
                     multiple={true}
                     autoViewport={true}
                 />
-
-
                 <Polyline
                     strokeColor='green'
                     path={history}
                 />
-
                 <NavigationControl />
                 <MapTypeControl />
                 <ScaleControl />
             </Map>
-
-
-
         </div>
-    }
+            
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>“设备已联网”物联网平台</Footer>
+        </Layout>
+
+
+
+      </Layout>
+
+
+    );
+  }
 }
+
+export default MapView
+
+
+
+
+
+

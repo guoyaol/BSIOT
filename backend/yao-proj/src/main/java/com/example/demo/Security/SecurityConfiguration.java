@@ -183,12 +183,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(
-                "/search/**",
-                "/register",
-                "/user/saverecord_anonymous",
-                "/actuator/**",
-                "/trend/get"
-                );
+            "/getlatestalert*",
+            "/createdevice*",
+            "/modifydevice*",
+            "/deletedevice*",
+            "/getdeviceamount*",
+            "/gettotalamount*",
+            "/gethistory*",
+            "/getallinfo*",
+            "/register*"
+            );
 //        web.ignoring().antMatchers("/favicon.ico");
 //        web.ignoring().antMatchers("/manifest.json");
     }

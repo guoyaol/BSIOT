@@ -2,6 +2,7 @@ import { Table, Button, Form, Descriptions } from 'antd';
 import { Icon, Input } from 'antd';
 import React from 'react';
 import { ReactDOM } from 'react';
+import { setTimeout } from 'timers';
 
 
 import { Card } from 'antd';
@@ -47,7 +48,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const { SubMenu } = Menu;
 
-class DeviceView extends React.Component {
+class App extends React.Component {
 
 
     componentDidMount() {
@@ -109,16 +110,18 @@ class DeviceView extends React.Component {
 
     render() {
 
+        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        // Only show error after a field is touched.
+        const usernameError = isFieldTouched('username') && getFieldError('username');
+        const passwordError = isFieldTouched('password') && getFieldError('password');
+
 
 
         const { collapsed } = this.state;
 
 
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
-        // Only show error after a field is touched.
-        const usernameError = isFieldTouched('username') && getFieldError('username');
-        const passwordError = isFieldTouched('password') && getFieldError('password');
+
 
         let { sortedInfo, filteredInfo } = this.state;
         sortedInfo = sortedInfo || {};
@@ -156,6 +159,8 @@ class DeviceView extends React.Component {
 
         ];
 
+
+        
         return (
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
@@ -241,4 +246,8 @@ class DeviceView extends React.Component {
     }
 }
 
-export default DeviceView
+const DeviceView = Form.create()(App);
+// ReactDOM.render(<EditableFormTable />, mountNode);
+
+export default DeviceView;
+//export default DeviceView
