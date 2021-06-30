@@ -8,7 +8,10 @@ import {
   FileOutlined,
   TeamOutlined,
   UserOutlined,
+  LikeOutlined
 } from '@ant-design/icons';
+
+
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -25,6 +28,7 @@ class IndexView extends React.Component {
         console.log(collapsed);
         this.setState({ collapsed });
       };
+
     
       render() {
         const { collapsed } = this.state;
@@ -33,14 +37,14 @@ class IndexView extends React.Component {
             <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
               <div className="logo" />
               <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                <Menu.Item key="1" icon={<PieChartOutlined />}>
-                  Option 1
+                <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => {this.props.history.push("/device");}}>
+                  <LikeOutlined />    设备管理
                 </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                  Option 2
+                <Menu.Item key="2" icon={<DesktopOutlined />} onClick={() => {this.props.history.push("/message");}}>
+                <LikeOutlined />    消息查询
                 </Menu.Item>
-                <Menu.Item key="2" icon={<DesktopOutlined />}>
-                  Option 2
+                <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => {this.props.history.push("/map");}}>
+                <LikeOutlined />    地图
                 </Menu.Item>
 
               </Menu>
