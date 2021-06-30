@@ -11,7 +11,7 @@ import AdminView from "./view/AdminView";
 import OurMap from "./view/MapView";
 import Device from "./view/DeviceView";
 import Message from "./view/MessageView"
-import Register from "./view/RegisterView"
+
 
 /** 全局路由 **/
 class BasicRouter extends React.Component {
@@ -35,7 +35,7 @@ class BasicRouter extends React.Component {
                     <Route exact path="/dashboard" component={Dashboard}/>
                     <Route exact path="/admin" component={AdminView}/>
 
-                    <Route exact path="/regsiter" component={Register}/>  
+
                     <Route exact path="/message" component={Message}/>                
                     <Route exact path="/device" component={Device}/>
                     <Route exact path="/map" component={OurMap}/>

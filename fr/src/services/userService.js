@@ -44,7 +44,7 @@ export const login = (data,his) => {
 
 
 export const register = (data,his) => {
-    const url = `http://49.235.245.206:8080/user/register`;
+    const url = `http://localhost:8080/register`;
     console.log("data:",data);
     message.config({
         prefixCls: 'my-message',

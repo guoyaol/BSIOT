@@ -21,22 +21,33 @@ class RegisterForm extends React.Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <Form onSubmit={this.handleSubmit} className="login-form" data-testid="submitform">
+
                 <Form.Item>
-                    {getFieldDecorator('username', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
+                    {getFieldDecorator('email', {
+                        rules: [{ required: true, message: '请输入你的邮箱！' }],
                     })(
                         <Input
-                            placeholder="Username" data-testid="uinput" className="uinput"
+                            placeholder="邮箱地址" data-testid="uinput" className="uinput"
+                        />,
+                    )}
+                </Form.Item>
+
+                <Form.Item>
+                    {getFieldDecorator('username', {
+                        rules: [{ required: true, message: '请输入你的用户名！' }],
+                    })(
+                        <Input
+                            placeholder="用户名" data-testid="uinput" className="uinput"
                         />,
                     )}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
+                        rules: [{ required: true, message: '请输入你的密码！' }],
                     })(
                         <Input
                             type="password"
-                            placeholder="输入密码"
+                            placeholder="密码"
                             data-testid="pinput"
                             className="pinput"
                         />,

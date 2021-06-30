@@ -1,65 +1,53 @@
-import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import Hotwords from "../components/Hotwords"
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+import React, { useState } from "react";
+import { Row, Col } from "antd";
 
-class DashboardView extends React.Component{
-    toindex=()=>{
-        this.props.history.push("/index")
-    }
-    toadmin=()=>{
-        this.props.history.push("/admin")
-    }
-    todashboard=()=>{
-        this.props.history.push("/dashboard")
-    }
+import { Card} from 'antd';
 
-    render(){
-        return(
-            <Layout>
-                <Header style={{height:"50px"}} className="header">
-                    <div className="logo" />
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                        <Menu.Item  key="1" onClick={this.toindex.bind(this)}>Pedia Search</Menu.Item>
-                    </Menu>
-                </Header>
-                <Layout >
-                    <Sider width={200} className="site-layout-background">
-                        <Menu
-                            mode="inline"
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
-                            style={{ height: '100%', borderRight: 0 }}
-                        >
-                            <SubMenu key="sub1" icon={<UserOutlined />} title="管理员面板">
-                                <Menu.Item key="2" onClick={this.toadmin.bind(this)}>权限管理</Menu.Item>
-                                <Menu.Item key="1" onClick={this.todashboard.bind(this)}>热点词条</Menu.Item>
-                            </SubMenu>
-                        </Menu>
-                    </Sider>
-                    <Layout style={{ padding: '0 24px 24px', height:"600px" }}>
-                        <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>管理员面板</Breadcrumb.Item>
-                            <Breadcrumb.Item>热点词条</Breadcrumb.Item>
-                        </Breadcrumb>
-                        <Content
-                            className="site-layout-background"
-                            style={{
-                                padding: 24,
-                                margin: 0,
-                                minHeight: 280,
-                            }}
-                        >
-                            <Hotwords style={{justifyContent: 'center'}}/>
-                         </Content>
-                    </Layout>
-                </Layout>
-            </Layout>
-        )
+const lineChartDefaultData = {
+  "New Visits": {
+    expectedData: [10, 12, 61, 34, 15, 16, 65],
+    actualData: [120, 82, 91, 154, 162, 140, 145],
+  }
+};
 
-    }
-}
 
-export default DashboardView;
+
+const Dashboard = () => {
+
+
+
+const count_device=3;
+const count_message=129;
+
+
+
+  return (
+      <div className="app-container">
+        <div className="site-card-wrapper">
+        <Row gutter={16}>
+          <Col span={8}>
+            <Card title="设备总量" bordered={false}>
+            {count_device}
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title="消息总量" bordered={false}>
+            {count_message}
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title="登陆状态" bordered={false}>
+              SUCCESS!
+            </Card>
+          </Col>
+        </Row>
+      </div>,
+
+      <div><font size="15">每日消息数</font> </div>
+
+
+    </div>
+  );
+};
+
+export default Dashboard;
