@@ -1,4 +1,5 @@
 import { Table, Button,Form, Descriptions } from 'antd';
+import { Icon, Input } from 'antd';
 import React from 'react';
 import { ReactDOM } from 'react';
 
@@ -22,7 +23,26 @@ const data = [
   },
 ];
 
+function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
 class App extends React.Component {
+
+    componentDidMount() {
+        // To disable submit button at the beginning.
+        this.props.form.validateFields();
+      }
+    
+      handleSubmit = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+          }
+        });
+      };
+
   state = {
     filteredInfo: null,
     sortedInfo: null,
@@ -57,6 +77,13 @@ class App extends React.Component {
   };
 
   render() {
+
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+
+    // Only show error after a field is touched.
+    const usernameError = isFieldTouched('username') && getFieldError('username');
+    const passwordError = isFieldTouched('password') && getFieldError('password');
+
     let { sortedInfo, filteredInfo } = this.state;
     sortedInfo = sortedInfo || {};
     filteredInfo = filteredInfo || {};
@@ -93,7 +120,49 @@ class App extends React.Component {
       
     ];
     return (
+
       <div>
+
+<Form layout="inline" onSubmit={this.handleSubmit}>
+        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: '请输入设备ID！' }],
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="设备ID"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: '请输入设备名！' }],
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="设备名称"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: '请输入设备描述！' }],
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="设备描述信息"
+            />,
+          )}
+        </Form.Item>
+        
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
+            修改/注册新设备
+          </Button>
+        </Form.Item>
+      </Form>
+
         <div className="table-operations">
           <Button onClick={this.clearFilters}>清除过滤器</Button>
         </div>
@@ -109,5 +178,3 @@ const EditableFormTable = Form.create()(App);
 // ReactDOM.render(<EditableFormTable />, mountNode);
 
 export default EditableFormTable;
-
-
