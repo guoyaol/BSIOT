@@ -13,6 +13,16 @@ export const getlatestalert = (data,callback) => {
     postRequest_v2(url, data, callback);
 };
 
+export const gethistory = (data,callback) => {
+    const url = `http://localhost:8080/gethistory`;
+    console.log("data:",data);
+    message.config({
+        prefixCls: 'my-message',
+        className: 'my-message'
+    });
+    postRequest_v2(url, data, callback);
+};
+
 export const getmsgamount = (data,callback) => {
     const url = `http://localhost:8080/gettotalamount`;
     message.config({
@@ -92,6 +102,7 @@ export const register = (data,his) => {
         console.log("register",data)
         if(data== 0) {
             message.error("注册失败");
+            alert("用户名或邮箱重复")
         }
         if(data!=0) {
             his.push("/login");

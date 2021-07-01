@@ -20,7 +20,7 @@ public interface MsgDeviceRepository extends JpaRepository<MsgDevice,Integer> {
     List<MsgDevice> GetAllInfo();
 
     //@Query(" select t from MsgDevice t where t.alert=1 or t.timestamp in (select max(a.timestamp) from MsgDevice a where a.alert=1 group by a.clientId ) group by t.clientId")
-    @Query(" select t from MsgDevice t where (t.timestamp,t.clientId) in (select max(a.timestamp),a.clientId from MsgDevice a group by a.clientId)")
+    @Query(" select t from MsgDevice t where (t.timestamp,t.clientId) in (select max(a.timestamp),a.clientId from MsgDevice a group by a.clientId) order by t.clientId")
     List<MsgDevice> GetLatest();
 }
 /*

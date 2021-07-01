@@ -53,21 +53,22 @@ class IndexView extends React.Component {
       lineData[0] = data;
       console.log(count_message);
       console.log(lineData);*/
+      lineData[0]=data;
       this.setState({
         count_message:data,
-        lineData:[20, 0, 0, 0, 0, 0, 0]
+        lineData:[data, 0, 0, 0, 0, 0, 0]
       })
-      lineData[0]=data;
+ 
       console.log(this.state.count_message);
       console.log(this.state.lineData);
     };
     let callback2 = (data) => {
       //count_device = data;
+      barData[0]=data;
       this.setState({
         count_device:data,
         barData:[data,0,0,0,0,0,0]
       })
-      barData[0]=data;
       console.log(this.state.count_device);
       console.log(this.state.barData);
     };
@@ -237,7 +238,7 @@ class IndexView extends React.Component {
                   </Row>
                 </div>,
 
-                <div><font size="15">每日消息数</font> </div>
+                <div><font size="10">信息统计图</font> </div>
                 <div id="forms" style={{ width: '800px', height: '350px' }}></div>
 
               </div>
