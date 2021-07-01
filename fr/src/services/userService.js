@@ -13,6 +13,24 @@ export const getlatestalert = (data,callback) => {
     postRequest_v2(url, data, callback);
 };
 
+export const getmsgamount = (data,callback) => {
+    const url = `http://localhost:8080/gettotalamount`;
+    message.config({
+        prefixCls: 'my-message',
+        className: 'my-message'
+    });
+    postRequest_v2(url, data, callback);
+};
+
+export const getdeviceamount = (data,callback) => {
+    const url = `http://localhost:8080/getdeviceamount`;
+    message.config({
+        prefixCls: 'my-message',
+        className: 'my-message'
+    });
+    postRequest_v2(url, data, callback);
+};
+
 export const getallinfo = (data,callback) => {
     const url = `http://localhost:8080/getallinfo`;
     message.config({

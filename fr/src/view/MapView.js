@@ -64,7 +64,7 @@ class MapView extends React.Component {
     　　　　isLoading: false,
     　　}
     }
-componentWillMount(){
+componentDidMount(){
     // userService.login({username:"abc",password:"abc"});
     this.setState({isLoading: true})
      let callback= (data) => {

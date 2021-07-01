@@ -3,6 +3,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { history } from "./utils/history";
 import IndexView from "./view/IndexView";
+import ResultView from "./view/ResultView";
 import LoginView from "./view/LoginView";
 import RegisterView from "./view/RegiterView";
 import OurMap from "./view/MapView";
@@ -31,6 +32,7 @@ class BasicRouter extends React.Component {
                     <Route exact path="/message" component={Message}/>                
                     <Route exact path="/device" component={Device}/>
                     <Route exact path="/map" component={OurMap}/>
+                    <Route exact path="/result" component={ResultView}/>
                     <Redirect to="/index"/>
                 </Switch>
             </Router>
