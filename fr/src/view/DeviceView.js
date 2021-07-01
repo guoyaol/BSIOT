@@ -3,8 +3,6 @@ import { Icon, Input } from 'antd';
 import React from 'react';
 import { ReactDOM } from 'react';
 import { setTimeout } from 'timers';
-
-
 import { Card } from 'antd';
 
 import { NavLink } from 'react-router-dom';
@@ -17,6 +15,7 @@ import {
     UserOutlined,
     LikeOutlined
 } from '@ant-design/icons';
+import * as userService from '../services/userService'
 
 //TODO:用API获取所有设备device
 //这个API可能得改一下，改成返回数据库msg_device里所有设备
@@ -160,7 +159,7 @@ class App extends React.Component {
         ];
 
 
-        
+
         return (
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
@@ -177,6 +176,12 @@ class App extends React.Component {
                         </Menu.Item>
                         <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
                             <LikeOutlined />    地图
+                        </Menu.Item>
+                        <Menu.Item key="5" icon={<DesktopOutlined />} onClick={() => {
+                            userService.logout()
+                            this.props.history.push("/login");
+                        }}>
+                            <LikeOutlined />    退出登陆
                         </Menu.Item>
 
                     </Menu>

@@ -48,12 +48,14 @@ export const login = (data,his) => {
             Global.set('login',1);
             Global.setName(data.data.name);
             message.success(data.message);
+            his.push("/index");
+            /*
             if(data.data.authorities[0].authority=="ROLE_ADMIN"){
                 his.push("/admin")
             }
             else{
                 his.push("/index");
-            }
+            }*/
 
         }
     };
@@ -74,7 +76,7 @@ export const register = (data,his) => {
             message.error("注册失败");
         }
         if(data!=0) {
-            his.push("/index");
+            his.push("/login");
             message.success("注册成功");
         }
     };
@@ -82,8 +84,8 @@ export const register = (data,his) => {
 };
 
 
-export const logout = (his) => {
-    const url = `http://49.235.245.206:8080/logout`;
+export const logout = () => {
+    const url = `http://localhost:8080/logout`;
     message.config({
         prefixCls: 'my-message',
         className: 'my-message'
@@ -94,7 +96,7 @@ export const logout = (his) => {
             Global.logout();
             Global.setName("");
             message.success(data.message);
-            his.push("/index")
+            //his.push("/index")
         }
         else{
             message.error(data.message);
@@ -125,7 +127,7 @@ export const queryrecord = (callback) => {
 };
 
 export const checklogin = (callback) => {
-    const url = `http://49.235.245.206:8080/user/checklogin`;
+    const url = `http://localhost:8080/checklogin`;
     postRequest_v3(url, {}, callback);
 };
 

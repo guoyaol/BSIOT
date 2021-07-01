@@ -112,6 +112,13 @@ componentWillMount(){
             <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
               <LikeOutlined />    地图
             </Menu.Item>
+            <Menu.Item key="5" icon={<DesktopOutlined />} onClick={() => 
+              {
+              userService.logout()
+              this.props.history.push("/login"); 
+              }}>
+              <LikeOutlined />    退出登陆
+            </Menu.Item>
 
           </Menu>
         </Sider>
