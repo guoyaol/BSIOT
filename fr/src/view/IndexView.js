@@ -31,6 +31,10 @@ class IndexView extends React.Component {
 
   state = {
     collapsed: false,
+    count_message:0,
+    count_device:0,
+    lineData : [0, 0, 0, 0, 0, 0, 0],
+    barData : [0, 0, 0, 0, 0, 0, 0]
   };
 
   onCollapse = collapsed => {
@@ -44,16 +48,28 @@ class IndexView extends React.Component {
   componentDidMount() {
 
     let callback1 = (data) => {
+      /*
       count_message = data;
       lineData[0] = data;
       console.log(count_message);
-      console.log(lineData);
+      console.log(lineData);*/
+      this.setState({
+        count_message:data,
+        lineData:[20, 0, 0, 0, 0, 0, 0]
+      })
+      lineData[0]=data;
+      console.log(this.state.count_message);
+      console.log(this.state.lineData);
     };
     let callback2 = (data) => {
-      count_device = data;
-      barData[0] = data;
-      console.log(count_device);
-      console.log(barData);
+      //count_device = data;
+      this.setState({
+        count_device:data,
+        barData:[data,0,0,0,0,0,0]
+      })
+      barData[0]=data;
+      console.log(this.state.count_device);
+      console.log(this.state.barData);
     };
     userService.getmsgamount({}, callback1)
     userService.getdeviceamount({}, callback2)
@@ -205,12 +221,12 @@ class IndexView extends React.Component {
                   <Row gutter={16}>
                     <Col span={8}>
                       <Card title="设备总量" bordered={false}>
-                        {count_device}
+                        {this.state.count_device}
                       </Card>
                     </Col>
                     <Col span={8}>
                       <Card title="消息总量" bordered={false}>
-                        {count_message}
+                        {this.state.count_message}
                       </Card>
                     </Col>
                     <Col span={8}>
