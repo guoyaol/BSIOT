@@ -2,12 +2,11 @@ import React from 'react';
 import { Table, Button } from 'antd';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-  LikeOutlined
+  HomeTwoTone,
+  PartitionOutlined,
+  MessageOutlined,
+  ZoomInOutlined,
+  RollbackOutlined
 } from '@ant-design/icons';
 import * as userService from '../services/userService'
 
@@ -98,30 +97,30 @@ class MessageView extends React.Component {
   };
 
   constructor(props) {
-    　　super(props)
-    　　
-    　　this.state = {
-    　　　　isLoading: false,
-    　　}
-    }
+    super(props)
 
-  componentWillMount(){
+    this.state = {
+      isLoading: false,
+    }
+  }
+
+  componentWillMount() {
     // userService.login({username:"abc",password:"abc"});
-    this.setState({isLoading: true})
-     let callback= (data) => {
-         alldata=data
-         console.log(alldata)
-         this.setState({isLoading: false})
-     };
-     userService.getallinfo({},callback)
- }
+    this.setState({ isLoading: true })
+    let callback = (data) => {
+      alldata = data
+      console.log(alldata)
+      this.setState({ isLoading: false })
+    };
+    userService.getallinfo({}, callback)
+  }
 
 
   render() {
-    　　let {isLoading} = this.state
-    　　if (isLoading) {
-    　　　　return<div>isLoading…</div>
-    　　} 
+    let { isLoading } = this.state
+    if (isLoading) {
+      return <div>isLoading…</div>
+    }
 
     const { collapsed } = this.state;
 
@@ -203,24 +202,23 @@ class MessageView extends React.Component {
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['3']} mode="inline">
-            <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
-              <LikeOutlined />    主页
+            <Menu.Item key="1" onClick={() => { this.props.history.push("/index"); }}>
+              <HomeTwoTone />   主页
             </Menu.Item>
-            <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
-              <LikeOutlined />    设备管理
+            <Menu.Item key="2" onClick={() => { this.props.history.push("/device"); }}>
+              <PartitionOutlined />   设备管理
             </Menu.Item>
-            <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
-              <LikeOutlined />    消息查询
+            <Menu.Item key="3" onClick={() => { this.props.history.push("/message"); }}>
+              <MessageOutlined />    消息查询
             </Menu.Item>
-            <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
-              <LikeOutlined />    地图
+            <Menu.Item key="4" onClick={() => { this.props.history.push("/map"); }}>
+              <ZoomInOutlined />    地图
             </Menu.Item>
-            <Menu.Item key="5" icon={<DesktopOutlined />} onClick={() => 
-              {
+            <Menu.Item key="5" onClick={() => {
               userService.logout()
-              this.props.history.push("/login"); 
-              }}>
-              <LikeOutlined />    退出登陆
+              this.props.history.push("/login");
+            }}>
+              <RollbackOutlined />    退出登陆
             </Menu.Item>
 
           </Menu>

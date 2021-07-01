@@ -1,17 +1,17 @@
 import React from 'react';
 import WrappedRegisterForm from '../components/RegisterForm';
 
-class RegisterView extends React.Component{
+class RegisterView extends React.Component {
 
 
-    render(){
-        return(
+    render() {
+        return (
             <div className="login-page">
                 <div className="login-container">
                     <div className="login-box">
                         <h1 className="page-title">欢迎注册“设备已联网”</h1>
                         <div className="login-content" data-testid="registerform">
-                            <WrappedRegisterForm history={this.props.history}/>
+                            <WrappedRegisterForm history={this.props.history} />
                         </div>
                     </div>
                 </div>

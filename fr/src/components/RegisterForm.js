@@ -12,7 +12,7 @@ class RegisterForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                userService.register(values,this.props.history);
+                userService.register(values, this.props.history);
             }
         });
     };
@@ -37,7 +37,10 @@ class RegisterForm extends React.Component {
                         rules: [{ required: true, message: '请输入你的用户名！' }],
                     })(
                         <Input
-                            placeholder="用户名" data-testid="uinput" className="uinput"
+                            minLength="6"
+                            placeholder="用户名"
+                            data-testid="uinput"
+                            className="uinput"
                         />,
                     )}
                 </Form.Item>
@@ -46,6 +49,7 @@ class RegisterForm extends React.Component {
                         rules: [{ required: true, message: '请输入你的密码！' }],
                     })(
                         <Input
+                            minLength="6"
                             type="password"
                             placeholder="密码"
                             data-testid="pinput"

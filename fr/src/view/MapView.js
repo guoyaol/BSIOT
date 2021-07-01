@@ -1,18 +1,15 @@
 import React from 'react';
-import { Input, Space } from 'antd';
 import { Radio } from 'antd';
-
-import { NavLink } from 'react-router-dom';
-import { Layout, Menu, Breadcrumb } from 'antd';
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-  TeamOutlined,
-  UserOutlined,
-  LikeOutlined
+  HomeTwoTone,
+  PartitionOutlined,
+  MessageOutlined,
+  ZoomInOutlined,
+  RollbackOutlined
 } from '@ant-design/icons';
-import { useState, Component } from "react";
+
+import { Layout, Menu} from 'antd';
+
 import { Polyline, Map, MarkerList, MapTypeControl, ScaleControl, NavigationControl, InfoWindow } from 'react-bmap'
 import { simpleMapStyle } from 'react-bmap'
 import * as userService from '../services/userService'
@@ -136,23 +133,23 @@ class MapView extends React.Component {
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu theme="dark" defaultSelectedKeys={['4']} mode="inline">
-            <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
-              <LikeOutlined />    主页
+            <Menu.Item key="1" onClick={() => { this.props.history.push("/index"); }}>
+              <HomeTwoTone />   主页
             </Menu.Item>
-            <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
-              <LikeOutlined />    设备管理
+            <Menu.Item key="2" onClick={() => { this.props.history.push("/device"); }}>
+              <PartitionOutlined />   设备管理
             </Menu.Item>
-            <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
-              <LikeOutlined />    消息查询
+            <Menu.Item key="3" onClick={() => { this.props.history.push("/message"); }}>
+              <MessageOutlined />    消息查询
             </Menu.Item>
-            <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
-              <LikeOutlined />    地图
+            <Menu.Item key="4" onClick={() => { this.props.history.push("/map"); }}>
+              <ZoomInOutlined />    地图
             </Menu.Item>
-            <Menu.Item key="5" icon={<DesktopOutlined />} onClick={() => {
+            <Menu.Item key="5" onClick={() => {
               userService.logout()
               this.props.history.push("/login");
             }}>
-              <LikeOutlined />    退出登陆
+              <RollbackOutlined />    退出登陆
             </Menu.Item>
 
           </Menu>

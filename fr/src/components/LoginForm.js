@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                userService.login(values,this.props.history);
+                userService.login(values, this.props.history);
             }
         });
     };
@@ -24,20 +24,24 @@ class LoginForm extends React.Component {
             <Form onSubmit={this.handleSubmit} className="login-form" data-testid="submitform">
                 <Form.Item>
                     {getFieldDecorator('username', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
+                        rules: [{ required: true, message: '请输入你的用户名' }],
                     })(
                         <Input
-                            placeholder="Username" data-testid="uinput" className="uinput"
+                            minLength="6"
+                            placeholder="用户名"
+                            data-testid="uinput"
+                            className="uinput"
                         />,
                     )}
                 </Form.Item>
                 <Form.Item>
                     {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
+                        rules: [{ required: true, message: '请输入你的密码！' }],
                     })(
                         <Input
+                            minLength="6"
                             type="password"
-                            placeholder="Password"
+                            placeholder="密码"
                             data-testid="pinput"
                             className="pinput"
                         />,
@@ -45,7 +49,7 @@ class LoginForm extends React.Component {
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" data-textid="submit2" htmlType="submit" className="login-form-button">
-                        Log in
+                        提交
                     </Button>
                     <a href="/register" data-textid="toregister" className="toregister">立即注册</a>
                 </Form.Item>

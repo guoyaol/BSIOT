@@ -1,9 +1,14 @@
 import { Table, Button, Form, Descriptions } from 'antd';
 import { Icon, Input } from 'antd';
 import React from 'react';
-import { ReactDOM } from 'react';
-import { setTimeout } from 'timers';
-import { Card } from 'antd';
+import { Row, Col } from 'antd';
+import {
+    HomeTwoTone,
+    PartitionOutlined,
+    MessageOutlined,
+    ZoomInOutlined,
+    RollbackOutlined
+  } from '@ant-design/icons';
 
 import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
@@ -50,36 +55,50 @@ const { SubMenu } = Menu;
 class App extends React.Component {
 
 
-    componentDidMount() {
-        // To disable submit button at the beginning.
-        this.props.form.validateFields();
-    }
+
 
     constructor(props) {
-        　　super(props)
-        　　
-        　　this.state = {
-        　　　　isLoading: false,
-        　　}
+        super(props)
+
+        this.state = {
+            isLoading: false,
         }
+    }
 
-    componentWillMount(){
-        this.setState({isLoading: true})
+    componentWillMount() {
+        this.setState({ isLoading: true })
 
-        let callback= (data) => {
-            devicedata=data
+        let callback = (data) => {
+            devicedata = data
             console.log(devicedata)
-            this.setState({isLoading: false})
+            this.setState({ isLoading: false })
         };
-        userService.showalldevice({},callback)
+        userService.showalldevice({}, callback)
     }
 
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                userService.createdevice(values, this.props.history);
             }
+        });
+    };
+
+    handleRename = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+
+            userService.modifydevice(values, this.props.history);
+
+        });
+    };
+
+    handleDelete = e => {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            userService.deletedevice(values, this.props.history);
+
         });
     };
 
@@ -127,10 +146,10 @@ class App extends React.Component {
 
 
     render() {
-        　　let {isLoading} = this.state
-        　　if (isLoading) {
-        　　　　return<div>isLoading…</div>
-        　　} 
+        let { isLoading } = this.state
+        if (isLoading) {
+            return <div>isLoading…</div>
+        }
 
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         // Only show error after a field is touched.
@@ -188,23 +207,23 @@ class App extends React.Component {
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
                     <div className="logo" />
                     <Menu theme="dark" defaultSelectedKeys={['2']} mode="inline">
-                        <Menu.Item key="1" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/index"); }}>
-                            <LikeOutlined />    主页
+                        <Menu.Item key="1" onClick={() => { this.props.history.push("/index"); }}>
+                            <HomeTwoTone />   主页
                         </Menu.Item>
-                        <Menu.Item key="2" icon={<LikeOutlined />} onClick={() => { this.props.history.push("/device"); }}>
-                            <LikeOutlined />    设备管理
+                        <Menu.Item key="2" onClick={() => { this.props.history.push("/device"); }}>
+                            <PartitionOutlined />   设备管理
                         </Menu.Item>
-                        <Menu.Item key="3" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/message"); }}>
-                            <LikeOutlined />    消息查询
+                        <Menu.Item key="3" onClick={() => { this.props.history.push("/message"); }}>
+                            <MessageOutlined />    消息查询
                         </Menu.Item>
-                        <Menu.Item key="4" icon={<DesktopOutlined />} onClick={() => { this.props.history.push("/map"); }}>
-                            <LikeOutlined />    地图
+                        <Menu.Item key="4" onClick={() => { this.props.history.push("/map"); }}>
+                            <ZoomInOutlined />    地图
                         </Menu.Item>
-                        <Menu.Item key="5" icon={<DesktopOutlined />} onClick={() => {
+                        <Menu.Item key="5" onClick={() => {
                             userService.logout()
                             this.props.history.push("/login");
                         }}>
-                            <LikeOutlined />    退出登陆
+                            <RollbackOutlined />    退出登陆
                         </Menu.Item>
 
                     </Menu>
@@ -214,46 +233,95 @@ class App extends React.Component {
                     <Content style={{ margin: '0 16px' }}>
 
                         <div>
+                            <Row type="flex" align="middle" justify="center"  >
+                                <Col >
+                                    <Form onSubmit={this.handleSubmit} className="login-form" data-testid="submitform">
 
-                            <Form layout="inline" onSubmit={this.handleSubmit}>
-                                <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-                                    {getFieldDecorator('username', {
-                                        rules: [{ required: true, message: '请输入设备ID！' }],
-                                    })(
-                                        <Input
-                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            placeholder="设备ID"
-                                        />,
-                                    )}
-                                </Form.Item>
-                                <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-                                    {getFieldDecorator('username', {
-                                        rules: [{ required: true, message: '请输入设备名！' }],
-                                    })(
-                                        <Input
-                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            placeholder="设备名称"
-                                        />,
-                                    )}
-                                </Form.Item>
-                                <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
-                                    {getFieldDecorator('username', {
-                                        rules: [{ required: true, message: '请输入设备描述！' }],
-                                    })(
-                                        <Input
-                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                            placeholder="设备描述信息"
-                                        />,
-                                    )}
-                                </Form.Item>
+                                        <Form.Item>
+                                            {getFieldDecorator('clientid', {
+                                                rules: [{ required: true, message: '请输入设备ID！' }],
+                                            })(
+                                                <Input
+                                                    placeholder="设备ID" data-testid="uinput" className="uinput"
+                                                />,
+                                            )}
+                                        </Form.Item>
+                                        <Form.Item>
+                                            {getFieldDecorator('name', {
+                                                rules: [{ required: true, message: '请输入设备名称！' }],
+                                            })(
+                                                <Input
+                                                    placeholder="设备名称" data-testid="uinput" className="uinput"
+                                                />,
+                                            )}
+                                        </Form.Item>
+                                        <Form.Item>
+                                            {getFieldDecorator('description', {
+                                                rules: [{ required: true, message: '请输入设备描述！' }],
+                                            })(
+                                                <Input
+                                                    placeholder="设备描述" data-testid="uinput" className="uinput"
+                                                />,
+                                            )}
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <Button data-testid="submit" type="primary" htmlType="submit" className="login-form-button">
+                                                创建新设备
+                                            </Button>
+                                        </Form.Item>
+                                    </Form>
+                                </Col>
+                                <Col>
+                                    <Form onSubmit={this.handleRename} className="login-form" data-testid="submitform">
 
-                                <Form.Item>
-                                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())}>
-                                        注册/修改设备信息
-                                    </Button>
-                                </Form.Item>
+                                        <Form.Item>
+                                            {getFieldDecorator('clientid', {
+                                                rules: [{ required: true, message: '请输入设备ID！' }],
+                                            })(
+                                                <Input
+                                                    placeholder="设备ID" data-testid="uinput" className="uinput"
+                                                />,
+                                            )}
+                                        </Form.Item>
+                                        <Form.Item>
+                                            {getFieldDecorator('name', {
+                                                rules: [{ required: true, message: '请输入设备名称！' }],
+                                            })(
+                                                <Input
+                                                    placeholder="设备名称" data-testid="uinput" className="uinput"
+                                                />,
+                                            )}
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <Button data-testid="submit" type="primary" htmlType="submit" className="login-form-button">
+                                                修改设备名称
+                                            </Button>
+                                        </Form.Item>
+                                    </Form>
 
-                            </Form>
+
+                                    <Form onSubmit={this.handleDelete} className="login-form" data-testid="submitform">
+
+                                        <Form.Item>
+                                            {getFieldDecorator('clientid', {
+                                                rules: [{ required: true, message: '请输入设备ID！' }],
+                                            })(
+                                                <Input
+                                                    placeholder="设备ID" data-testid="uinput" className="uinput"
+                                                />,
+                                            )}
+                                        </Form.Item>
+                                        <Form.Item>
+                                            <Button data-testid="submit" type="primary" htmlType="submit" className="login-form-button">
+                                                删除设备
+                                            </Button>
+                                        </Form.Item>
+                                    </Form>
+
+                                </Col>
+
+                            </Row>
+
 
                             <div className="table-operations">
                                 <Button onClick={this.clearFilters}>清除过滤器</Button>
