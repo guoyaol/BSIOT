@@ -4,6 +4,15 @@ import {message} from 'antd';
 import {Global} from "../utils/Global";
 import cookie from 'react-cookies'
 
+export const showalldevice = (data,callback) => {
+    const url = `http://localhost:8080/showalldevice`;
+    message.config({
+        prefixCls: 'my-message',
+        className: 'my-message'
+    });
+    postRequest_v2(url, data, callback);
+};
+
 export const getlatestalert = (data,callback) => {
     const url = `http://localhost:8080/getlatestalert`;
     message.config({
@@ -50,15 +59,6 @@ export const getallinfo = (data,callback) => {
     postRequest_v2(url, data, callback);
 };
 
-export const create = (data,callback) => {
-    const url = `http://49.235.245.206:8080/trend/create`;
-    message.config({
-        prefixCls: 'my-message',
-        className: 'my-message'
-    });
-    console.log("data:",data);
-    postRequest_v3(url, data, callback);
-};
 
 export const login = (data,his) => {
     const url = `http://localhost:8080/login`;
@@ -134,26 +134,9 @@ export const logout = () => {
     postRequest_v3(url, {}, callback);
 };
 
-export const saverecord = (data) => {
-    const url = `http://49.235.245.206:8080/user/saverecord`;
-    const callback = (data) => {
-        console.log(data);
-        if(data==null) {
-            ;
-        }
-        else{
-            if(data.code==403){
-                message.error(data.message);
-            }
-        }
-    };
-    postRequest_v3(url, data, callback);
-};
 
-export const queryrecord = (callback) => {
-    const url = `http://49.235.245.206:8080/user/queryrecord`;
-    postRequest_v3(url, {}, callback);
-};
+
+
 
 export const checklogin = (callback) => {
     const url = `http://localhost:8080/checklogin`;

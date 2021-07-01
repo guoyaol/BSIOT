@@ -18,18 +18,18 @@ import {
 import * as userService from '../services/userService'
 
 //TODO:用API获取所有设备device
-//这个API可能得改一下，改成返回数据库msg_device里所有设备
+//这个API可能得改一下，改成返回数据库device里所有设备
 //前端可以实现筛选
-const data = [
+var devicedata = [
     {
         id: 1,
-        clientid: 'client1',
+        clientId: 'client1',
         name: 'Ship',
         description: 'New York No. 1 Lake Park'
     },
     {
         id: 2,
-        clientid: 'client2',
+        clientId: 'client2',
         name: 'Plane',
         description: 'New York No. 1 Lake Park'
     },
@@ -53,6 +53,25 @@ class App extends React.Component {
     componentDidMount() {
         // To disable submit button at the beginning.
         this.props.form.validateFields();
+    }
+
+    constructor(props) {
+        　　super(props)
+        　　
+        　　this.state = {
+        　　　　isLoading: false,
+        　　}
+        }
+
+    componentWillMount(){
+        this.setState({isLoading: true})
+
+        let callback= (data) => {
+            devicedata=data
+            console.log(devicedata)
+            this.setState({isLoading: false})
+        };
+        userService.showalldevice({},callback)
     }
 
     handleSubmit = e => {
@@ -108,6 +127,10 @@ class App extends React.Component {
 
 
     render() {
+        　　let {isLoading} = this.state
+        　　if (isLoading) {
+        　　　　return<div>isLoading…</div>
+        　　} 
 
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         // Only show error after a field is touched.
@@ -127,17 +150,17 @@ class App extends React.Component {
         filteredInfo = filteredInfo || {};
         const columns = [
             {
-                title: 'clientid',
-                dataIndex: 'clientid',
-                key: 'clientid',
+                title: 'clientId',
+                dataIndex: 'clientId',
+                key: 'clientId',
                 filters: [{ text: 'client1', value: 'client1' },
                 { text: 'client2', value: 'client2' },
                 { text: 'client3', value: 'client3' },
                 { text: 'client4', value: 'client4' },
                 { text: 'client5', value: 'client5' },
                 ],
-                filteredValue: filteredInfo.clientid || null,
-                onFilter: (value, record) => record.clientid.includes(value),
+                filteredValue: filteredInfo.clientId || null,
+                onFilter: (value, record) => record.clientId.includes(value),
 
                 ellipsis: true,
             },
@@ -235,7 +258,7 @@ class App extends React.Component {
                             <div className="table-operations">
                                 <Button onClick={this.clearFilters}>清除过滤器</Button>
                             </div>
-                            <Table columns={columns} dataSource={data} onChange={this.handleChange} />
+                            <Table columns={columns} dataSource={devicedata} onChange={this.handleChange} />
                         </div>
 
                     </Content>

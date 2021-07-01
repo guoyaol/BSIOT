@@ -6,11 +6,17 @@ import com.example.demo.Service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class DeviceServiceImpl implements DeviceService{
     @Autowired
     private DeviceDao deviceDao;
+
+    @Override
+    public List<Device> ShowAllDevice(){
+        return deviceDao.ShowAllDevice();
+    }
 
     @Override
     public int Create(String clientId,String name,String description){
