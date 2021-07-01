@@ -35,8 +35,8 @@ public class MsgDeviceDaoImpl implements MsgDeviceDao {
     }
 
     @Override
-    public List<MsgDevice> GetAllInfo(String clientid){
-        return msgdeviceRepository.GetAllInfo(clientid);
+    public List<MsgDevice> GetAllInfo(){
+        return msgdeviceRepository.GetAllInfo();
     }
 
     @Override

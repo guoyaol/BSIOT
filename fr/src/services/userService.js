@@ -13,6 +13,15 @@ export const getlatestalert = (data,callback) => {
     postRequest_v2(url, data, callback);
 };
 
+export const getallinfo = (data,callback) => {
+    const url = `http://localhost:8080/getallinfo`;
+    message.config({
+        prefixCls: 'my-message',
+        className: 'my-message'
+    });
+    postRequest_v2(url, data, callback);
+};
+
 export const create = (data,callback) => {
     const url = `http://49.235.245.206:8080/trend/create`;
     message.config({

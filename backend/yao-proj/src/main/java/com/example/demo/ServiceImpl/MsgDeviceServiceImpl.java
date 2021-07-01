@@ -37,8 +37,8 @@ public class MsgDeviceServiceImpl implements MsgDeviceService{
     }
 
     @Override
-    public List<MsgDevice> GetAllInfo(String clientid){
-        return msgdeviceDao.GetAllInfo(clientid);
+    public List<MsgDevice> GetAllInfo(){
+        return msgdeviceDao.GetAllInfo();
     }
 
     @Override

@@ -1,7 +1,5 @@
 import React from 'react';
 import { Table, Button } from 'antd';
-
-
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
@@ -11,49 +9,47 @@ import {
   UserOutlined,
   LikeOutlined
 } from '@ant-design/icons';
+import * as userService from '../services/userService'
 
 const { Header, Content, Footer, Sider } = Layout;
+
+
 /*
-CREATE TABLE `msg_device`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT,
-  `alert` int(0) NULL DEFAULT NULL,
-  `clientid` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `info` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `lat` double NULL DEFAULT NULL,
-  `lng` double NULL DEFAULT NULL,
-  `timestamp` double NULL DEFAULT NULL,
-  `value` int(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+{
+"id": 39,
+"alert": 0,
+"clientId": "device0003",
+"info": "Device Data 2021/06/29 12:05:32",
+"lat": 30.421020793914796,
+"lng": 120.22522549629213,
+"timestamp": 1624939532141,
+"value": 45
+}
 */
 
-//TODO:用API获取所有消息
-//http://localhost:8080/getallinfo?clientid=device0001
-//这个API可能得改一下，改成返回数据库里的所有消息msg_device
-//前端可以实现筛选
-const data = [
-    {
-      id: 0,
-      alert: 1,
-      clientid: 'client1',
-      info: 'New York No. 1 Lake Park',
-      lat:129,
-      lng:29,
-      timestamp:123123123,
-      value:29,
-    },
-    {
-      id: 2,
-      alert: 0,
-      clientid: 'client2',
-      info: 'London No. 1 Lake Park',
-      lat:128.5,
-      lng:28,
-      timestamp:123123122,
-      value:2,
-    },
-  
-  ];
+var alldata = [
+  {
+    "id": 39,
+    "alert": 0,
+    "clientId": "device0003",
+    "info": "Device Data 2021/06/29 12:05:32",
+    "lat": 30.421020793914796,
+    "lng": 120.22522549629213,
+    "timestamp": 1624939532141,
+    "value": 45
+  },
+  {
+    id: 2,
+    alert: 0,
+    clientId: 'client2',
+    info: 'London No. 1 Lake Park',
+    lat: 128.5,
+    lng: 28,
+    timestamp: 123123122,
+    value: 2,
+  },
+
+];
 
 
 
@@ -101,8 +97,31 @@ class MessageView extends React.Component {
     });
   };
 
+  constructor(props) {
+    　　super(props)
+    　　
+    　　this.state = {
+    　　　　isLoading: false,
+    　　}
+    }
+
+  componentWillMount(){
+    // userService.login({username:"abc",password:"abc"});
+    this.setState({isLoading: true})
+     let callback= (data) => {
+         alldata=data
+         console.log(alldata)
+         this.setState({isLoading: false})
+     };
+     userService.getallinfo({},callback)
+ }
+
 
   render() {
+    　　let {isLoading} = this.state
+    　　if (isLoading) {
+    　　　　return<div>isLoading…</div>
+    　　} 
 
     const { collapsed } = this.state;
 
@@ -111,17 +130,17 @@ class MessageView extends React.Component {
     filteredInfo = filteredInfo || {};
     const columns = [
       {
-        title: 'clientid',
-        dataIndex: 'clientid',
-        key: 'clientid',
-        filters: [{ text: 'client1', value: 'client1' }, 
-        { text: 'client2', value: 'client2' }, 
-        { text: 'client3', value: 'client3' }, 
-        { text: 'client4', value: 'client4' }, 
-        { text: 'client5', value: 'client5' }, 
-      ],
-        filteredValue: filteredInfo.clientid || null,
-        onFilter: (value, record) => record.clientid.includes(value),
+        title: 'clientId',
+        dataIndex: 'clientId',
+        key: 'clientId',
+        filters: [{ text: 'device0001', value: 'device0001' },
+        { text: 'device0002', value: 'device0002' },
+        { text: 'device0003', value: 'device0003' },
+        { text: 'device0004', value: 'device0004' },
+        { text: 'device0005', value: 'device0005' },
+        ],
+        filteredValue: filteredInfo.clientId || null,
+        onFilter: (value, record) => record.clientId.includes(value),
 
         ellipsis: true,
       },
@@ -203,13 +222,13 @@ class MessageView extends React.Component {
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
 
-          <div>
-        <div className="table-operations">
-          <Button onClick={this.clearFilters}>清除过滤器</Button>
-          <Button onClick={this.clearAll}>清除过滤器和排序</Button>
-        </div>
-        <Table columns={columns} dataSource={data} onChange={this.handleChange} />
-      </div>
+            <div>
+              <div className="table-operations">
+                <Button onClick={this.clearFilters}>清除过滤器</Button>
+                <Button onClick={this.clearAll}>清除过滤器和排序</Button>
+              </div>
+              <Table columns={columns} dataSource={alldata} onChange={this.handleChange} />
+            </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>“设备已联网”物联网平台</Footer>
         </Layout>

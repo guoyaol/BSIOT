@@ -43,8 +43,8 @@ public class MsgDeviceController {
     }
 
     @PostMapping(value = "/getallinfo")
-    public List<MsgDevice> GetAllInfo(@RequestParam("clientid") String clientid){
-        return msgdeviceService.GetAllInfo(clientid);
+    public List<MsgDevice> GetAllInfo(){
+        return msgdeviceService.GetAllInfo();
     }
 
     @PostMapping(value = "/getlatestalert")

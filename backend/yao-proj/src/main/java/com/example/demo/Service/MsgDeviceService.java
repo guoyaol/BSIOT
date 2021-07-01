@@ -10,6 +10,6 @@ public interface MsgDeviceService {
     int GetTotalAmount();
     List<Double> GetHistoryLat(String clientid);
     List<Double> GetHistoryLng(String clientid);
-    List<MsgDevice> GetAllInfo(String clientid);
+    List<MsgDevice> GetAllInfo();
     List<MsgDevice> GetLatestAlert();
 }
