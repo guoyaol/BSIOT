@@ -177,7 +177,6 @@ class IndexView extends React.Component {
         data: lineData
       }]
     });
-    this.setState({lineData:[1]})
   }
 
 
