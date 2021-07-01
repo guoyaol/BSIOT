@@ -31,10 +31,10 @@ class IndexView extends React.Component {
 
   state = {
     collapsed: false,
-    count_message:0,
-    count_device:0,
-    lineData : [0, 0, 0, 0, 0, 0, 0],
-    barData : [0, 0, 0, 0, 0, 0, 0]
+    count_message: 0,
+    count_device: 0,
+    lineData: [0, 0, 0, 0, 0, 0, 0],
+    barData: [0, 0, 0, 0, 0, 0, 0]
   };
 
   onCollapse = collapsed => {
@@ -48,32 +48,29 @@ class IndexView extends React.Component {
   componentDidMount() {
 
     let callback1 = (data) => {
-      /*
-      count_message = data;
+
       lineData[0] = data;
-      console.log(count_message);
-      console.log(lineData);*/
-      lineData[0]=data;
       this.setState({
-        count_message:data,
-        lineData:[data, 0, 0, 0, 0, 0, 0]
+        count_message: data,
+        lineData: [data, 0, 0, 0, 0, 0, 0]
       })
- 
+
       console.log(this.state.count_message);
       console.log(this.state.lineData);
     };
     let callback2 = (data) => {
       //count_device = data;
-      barData[0]=data;
+      barData[0] = data;
       this.setState({
-        count_device:data,
-        barData:[data,0,0,0,0,0,0]
+        count_device: data,
+        barData: [data, 0, 0, 0, 0, 0, 0]
       })
       console.log(this.state.count_device);
       console.log(this.state.barData);
     };
     userService.getmsgamount({}, callback1)
     userService.getdeviceamount({}, callback2)
+
 
     var myChart = echarts.init(document.getElementById('forms'));
 
@@ -93,8 +90,9 @@ class IndexView extends React.Component {
       ].join('-'));
     };
 
-
-
+    console.log("数据传入前的核验")
+    console.log(lineData)
+    console.log(barData)
     myChart.setOption({
       backgroundColor: '#0f375f',
       tooltip: {
@@ -179,6 +177,7 @@ class IndexView extends React.Component {
         data: lineData
       }]
     });
+    this.setState({lineData:[1]})
   }
 
 
