@@ -21,6 +21,9 @@ emqx start
 3.Run python script: MUST DO
 
 ```bash
+conda env create -f environment.yml
+conda activate iot
+
 python mqttServer.py
 ```
 
@@ -29,7 +32,7 @@ python mqttServer.py
 4.Start Backend: based on SpringBoot
 
 ```bash
-cd ./SB_backend
+cd BSIOT/backend
 
 mvn install
 
@@ -39,7 +42,7 @@ java -jar ./target/demo-0.0.1-SNAPSHOT.jar
 5.Run Frontend: based on react
 
 ```bash
-cd ./react_frontend
+cd BSIOT/frontend
 
 npm install
 
