@@ -1,48 +1,51 @@
-# BSIOT
+# “设备已联网”物联网管理平台
 
-1.create database & tables
+1.Database
+
+创建数据库，数据表，插入一定原始数据
 
 ```mysql
 >mysql source miniiot.sql
 ```
 
+更改MySql连接信息
 
+```properties
+#in 
+#SrcCode/backend/src/main/resources/application.properties
 
-2.Start MQTT broker
-
-```bash
-brew install EMQX
-
-emqx start
+spring.datasource.username= YOUR USERNAME!
+spring.datasource.password= YOUR PASSWORD!
 ```
 
-
-
-3.Run python script: MUST DO
+2.启动MQTT broker &配置python环境，运行脚本
 
 ```bash
-conda env create -f environment.yml
+cd SrcCode/mqtt
+
+brew install emqx
+emqx start
+
+conda env create -f py_environment.yml
 conda activate iot
 
 python mqttServer.py
 ```
 
-
-
-4.Start Backend: based on SpringBoot
+3.启动后端：基于SpringBoot
 
 ```bash
-cd BSIOT/backend
+cd SrcCode/backend
 
 mvn install
 
 java -jar ./target/demo-0.0.1-SNAPSHOT.jar
 ```
 
-5.Run Frontend: based on react
+4.启动前端：基于react
 
 ```bash
-cd BSIOT/frontend
+cd SrcCode/frontend
 
 npm install
 

@@ -1,5 +1,0 @@
-<factorypath>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/paho/org.eclipse.paho.client.mqttv3/1.2.5/org.eclipse.paho.client.mqttv3-1.2.5.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.18.18/lombok-1.18.18.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/alibaba/fastjson/1.2.75/fastjson-1.2.75.jar" enabled="true" runInBatchMode="false"/>
-</factorypath>
